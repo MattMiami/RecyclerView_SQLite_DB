@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Preferencias Usuario">
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:defaultValue="Default value"
+        android:key="et_Prefe_Usu"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Guardar las preferencias de usuario"
+        android:title="preferencias de usuario" >
+
+        <PreferenceCategory android:title="Datos Usuario"/>
+        <EditTextPreference
+            android:id="@+id/prefe_user"
+            android:defaultValue="user"
+            android:key="usuario"
+            android:title="Nombre usuario" />
+
+        <EditTextPreference
+            android:id="@+id/prefe_pass"
+            android:defaultValue="password"
+            android:key="contrasenha"
+            android:title="Contraseña usuario" />
+
+
+    </PreferenceScreen>
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@android:array/phoneTypes"
+        android:entryValues="@android:array/phoneTypes"
+        android:key="listaTipoTelefono"
+        android:title="Tipo de teléfono" />
+
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@android:array/emailAddressTypes"
+        android:entryValues="@android:array/emailAddressTypes"
+        android:key="tipoEmail"
+        android:title="Tipo email" />
+    <PreferenceCategory android:title="Preferencias Sonido">
+    </PreferenceCategory>
+    <RingtonePreference
+        android:defaultValue=""
+        android:key="prefe_tono"
+        android:summary="Guarda el sonido de llamada"
+        android:title="Tono de llamada" />
+    <EditTextPreference
+        android:defaultValue="50"
+        android:key="et_volumen"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Indica el volumen"
+        android:title="Volumen dispositivo"/>
+    <ListPreference
+        android:defaultValue="1"
+        android:dialogTitle="Elige dispositivo de salida"
+        android:entries="@array/dispositivos_salida"
+        android:entryValues="@array/valores_dispositivos_salida"
+        android:key="listaSalidasSonido"
+        android:title="Dispositivos de salida" />
+
+
+    <PreferenceCategory android:title="Otras preferencias">
+    </PreferenceCategory>
+
+    <!--De esta forma podemos tener otra ventana de preferencias-->
+    <PreferenceScreen
+        android:key="prefe_sistema"
+        android:title="Preferencias del sistema">
+
+        <PreferenceCategory android:title="Conexión internet"/>
+        <SwitchPreference
+            android:key="wifi"
+            android:title="Activar WIFI"/>
+        <SwitchPreference
+            android:key="datos"
+            android:title="Datos Móviles"/>
+
+
+
+    </PreferenceScreen>
+
+
+
+</PreferenceScreen>

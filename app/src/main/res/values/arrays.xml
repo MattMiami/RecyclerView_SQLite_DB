@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Estos son los valores texto guardados del usuario-->
+    <string-array name="dispositivos_salida">
+        <item>Altavoz del movil</item>
+        <item>Conexión bluetooth</item>
+        <item>Auriculares</item>
+    </string-array>
+
+    <!-- Estos son los valores de los textos guardados en el array anterior-->
+    <string-array name="valores_dispositivos_salida">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+
+</resources>
