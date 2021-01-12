@@ -43,7 +43,7 @@ public class DB_Contactos extends SQLiteOpenHelper {
     //---------------------------------------Metodos propios de SQLITEDATABASE para tratar registros----------------------------------------
 
 
-    public long insetar(Contacto c){
+    public long insertar(Contacto c){
 
         long resgitros_afectados = -1;
 
