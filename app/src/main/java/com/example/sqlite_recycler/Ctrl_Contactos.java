@@ -15,6 +15,8 @@ public class Ctrl_Contactos extends DB_Contactos {
         super(context);
     }
 
+//-----------------------------------------------------
+
     public long insertar(Contacto c){
 
         long resgitros_afectados = -1;
@@ -40,6 +42,48 @@ public class Ctrl_Contactos extends DB_Contactos {
         return resgitros_afectados;
     }
 
+    //-----------------------------------------------------------
+
+    public long borrar(String dni){
+        long registros_afectados = 0;
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        if(db != null){
+            ContentValues valores = new ContentValues();
+            registros_afectados =    db.delete("Contactos", "dni= " + dni, null);
+        }
+        db.close();
+        return registros_afectados;
+
+    }
+
+    //----------------------------------------------------------
+
+    public long modificar(Contacto c){
+        long resgitros_afectados = -1;
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        if(db != null){
+            ContentValues valores = new ContentValues();
+
+            valores.put("dni", c.getDni());
+            valores.put("name", c.getName());
+            valores.put("surname", c.getSurname());
+            valores.put("mail", c.getMail());
+            valores.put("address", c.getAddress());
+            valores.put("phone", c.getPhone());
+            valores.put("GPS_x", c.getGPS_x());
+            valores.put("GPS_y", c.getGPS_y());
+
+            resgitros_afectados = db.update("Contactos", valores, "dni=" + c.getDni(), null);
+        }
+        db.close();
+        return resgitros_afectados;
+    }
+
+    //-----------------------------------------------------------
     public ArrayList<Contacto> listarContactos(){
         SQLiteDatabase db=getReadableDatabase();
         Contacto c;

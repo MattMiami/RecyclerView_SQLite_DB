@@ -27,4 +27,9 @@
         android:name="com.example.sqlite_recycler.ui.contatos.ContactosFragment"
         android:label="fragment_contactos"
         tools:layout="@layout/fragment_contactos" />
+    <fragment
+        android:id="@+id/mapas"
+        android:name="com.example.sqlite_recycler.Mapas"
+        android:label="fragment_mapas"
+        tools:layout="@layout/fragment_mapas" />
 </navigation>

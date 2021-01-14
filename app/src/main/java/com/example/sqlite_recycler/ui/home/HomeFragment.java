@@ -20,7 +20,7 @@ import com.example.sqlite_recycler.R;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
@@ -42,6 +42,8 @@ public class HomeFragment extends Fragment{
 
     /*Botones*/
     Button btAdd;
+    Button btDelete;
+    Button btMod;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,30 +52,21 @@ public class HomeFragment extends Fragment{
 
     }
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        //final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                /*textView.setText(s);*/
             }
-
-
-
-
         });
 
         /*Acceso a la base de datos*/
         controlador = new Ctrl_Contactos(getContext());
 
-
         /*Views de datos para tratar con la base de datos*/
-
         etDni = root.findViewById(R.id.etDni);
         etName = root.findViewById(R.id.etName);
         etSurname = root.findViewById(R.id.etSurname);
@@ -86,10 +79,13 @@ public class HomeFragment extends Fragment{
 
         /*Botones*/
         btAdd = root.findViewById(R.id.btAdd);
+        btDelete = root.findViewById(R.id.btDelete);
+        btMod = root.findViewById(R.id.btMod);
 
         Toast.makeText(getContext(), " Tamaño " + controlador.listarContactos().size(), Toast.LENGTH_SHORT).show();
 
 
+        //--------------------BOTON ALTA CONTACTO------------------------------------
 
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +107,41 @@ public class HomeFragment extends Fragment{
                 }
             }
 
+        });
+
+        //-----------------------BOTON BAJA CONTACTO----------------------------------
+
+        btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dni = etDni.getText().toString();
+                if (controlador.borrar(dni) > 0) {
+                    Toast.makeText(getContext(), "Eliminado correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error al borrar registro", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //---------------------BOTON MODIFICAR CONTACTO--------------------------------
+
+        btMod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c = new Contacto(etDni.getText().toString(),
+                        etName.getText().toString(),
+                        etSurname.getText().toString(),
+                        etMail.getText().toString(),
+                        etAddress.getText().toString(),
+                        etPhone.getText().toString(),
+                        Float.parseFloat(etGPS_x.getText().toString()),
+                        Float.parseFloat(etGPS_y.getText().toString()));
+                if (controlador.modificar(c) > 0) {
+                    Toast.makeText(getContext(), "Modificado correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error al modificar registro", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
 
         return root;

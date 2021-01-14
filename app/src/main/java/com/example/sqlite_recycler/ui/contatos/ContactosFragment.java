@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sqlite_recycler.Contacto;
@@ -36,6 +37,8 @@ public class ContactosFragment extends Fragment {
     private Contacto c;
 
 
+
+
     public static ContactosFragment newInstance() {
         return new ContactosFragment();
     }
@@ -46,7 +49,9 @@ public class ContactosFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_contactos, container, false);
         //Inicializamos el recycler
         rvContactos = v.findViewById(R.id.rvCotactos);
-        cargarDatosArtistas();
+
+
+        cargarDatosContactos();
         return v;
     }
 
@@ -54,13 +59,15 @@ public class ContactosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         //Asignamos el itemView a nuestro recycler view
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvContactos.setLayoutManager(layoutManager);
+
         //Inicializamos el adaptador y lo asociamos al recycler
         adapter = new RecyclerContactosAdapter(listaContactos, getContext());
         rvContactos.setAdapter(adapter);
+
+
     }
 
     @Override
@@ -70,7 +77,7 @@ public class ContactosFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    private void cargarDatosArtistas() {
+    private void cargarDatosContactos() {
         Ctrl_Contactos list = new Ctrl_Contactos(getContext());
         listaContactos = list.listarContactos();
         Toast.makeText(getContext(), " " + listaContactos.size(),Toast.LENGTH_SHORT).show();
